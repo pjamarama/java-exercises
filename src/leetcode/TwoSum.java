@@ -12,6 +12,7 @@
 
 package leetcode;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class TwoSum {
@@ -20,9 +21,13 @@ public class TwoSum {
         int[] nums2 = {3, 2, 4};
         int[] nums3 = {3, 3};
 
-        int[] test = twoSum(nums2, 6);
-        int[] test2 = twoSum(nums, 9);
-        int[] test3 = twoSum(nums3, 6);
+
+//        int[] test = twoSum(nums2, 6);
+//        int[] test = twoSum(nums, 9);
+//        int[] test = twoSum(nums3, 6);
+//        int[] test = twoSum2(nums2, 6);
+//        int[] test = twoSum2(nums, 9);
+        int[] test = twoSum2(nums3, 6);
 
         for (int i : test) {
             System.out.print(i + " ");
@@ -64,5 +69,30 @@ public class TwoSum {
             array[j++] = nums[i];
         }
         return array;
+    }
+
+    public static int[] twoSum2(int[] nums, int target) {
+        int a = 0, b = 0;
+
+        Integer[] newNums = new Integer[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            newNums[i] = nums[i];
+        }
+
+        outerLoopBreak:
+        for (int x : newNums) {
+            for (int y : newNums) {
+                if (Arrays.asList(newNums).indexOf(x) == Arrays.asList(newNums).indexOf(y)) {
+                    continue;
+                }
+                if (x + y == target) {
+                    a = x;
+                    b = y;
+                    break outerLoopBreak;
+                }
+            }
+        }
+        int[] result = {Arrays.asList(newNums).indexOf(a), Arrays.asList(newNums).indexOf(b)};
+        return result;
     }
 }
