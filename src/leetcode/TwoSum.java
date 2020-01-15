@@ -12,7 +12,6 @@
 
 package leetcode;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class TwoSum {
@@ -22,20 +21,16 @@ public class TwoSum {
         int[] nums3 = {3, 3};
 
 
-//        int[] test = twoSum(nums2, 6);
-//        int[] test = twoSum(nums, 9);
+//        int[] test = twoSumBrute(nums2, 6);
+        int[] test = twoSumBrute(nums, 9);
 //        int[] test = twoSum(nums3, 6);
 //        int[] test = twoSum2(nums2, 6);
 //        int[] test = twoSum2(nums, 9);
-        int[] test = twoSum2(nums3, 6);
+//        int[] test = twoSumBrute(nums3, 6);
 
         for (int i : test) {
             System.out.print(i + " ");
         }
-
-        /* Output [0, 0]
-        * Expected [0, 1]
-        */
     }
 
     public static int[] twoSum(int[] nums, int target) {
@@ -71,28 +66,14 @@ public class TwoSum {
         return array;
     }
 
-    public static int[] twoSum2(int[] nums, int target) {
-        int a = 0, b = 0;
-
-        Integer[] newNums = new Integer[nums.length];
+    public static int[] twoSumBrute(int[] nums, int target) {
         for (int i = 0; i < nums.length; i++) {
-            newNums[i] = nums[i];
-        }
-
-        outerLoopBreak:
-        for (int x : newNums) {
-            for (int y : newNums) {
-                if (Arrays.asList(newNums).indexOf(x) == Arrays.asList(newNums).indexOf(y)) {
-                    continue;
-                }
-                if (x + y == target) {
-                    a = x;
-                    b = y;
-                    break outerLoopBreak;
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target) {
+                    return new int[]{i, j};
                 }
             }
         }
-        int[] result = {Arrays.asList(newNums).indexOf(a), Arrays.asList(newNums).indexOf(b)};
-        return result;
+        throw new IllegalArgumentException("None of the elements sum to the target value");
     }
 }
