@@ -12,87 +12,69 @@
 
 package leetcode;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TwoSum {
     public static void main(String[] args) {
-        int[] nums = {2, 7, 11, 5};
-        int[] nums2 = {3, 2, 4};
+        int[] nums2 = {2, 3, 4, 7};
         int[] nums3 = {3, 3};
+        int[] nums1 = {2, 5, 7};
 
+//        for (int i : twoSumsBrute(nums3, 6)) {
+//            System.out.println(i);
+//        }
 
-//        int[] test = twoSum(nums2, 6);
-//        int[] test = twoSum(nums, 9);
-//        int[] test = twoSum(nums3, 6);
-//        int[] test = twoSum2(nums2, 6);
-//        int[] test = twoSum2(nums, 9);
-        int[] test = twoSum2(nums3, 6);
-
-        for (int i : test) {
-            System.out.print(i + " ");
+        for (int i : twoSumsMap(nums2, 11)) {
+            System.out.println(i);
         }
 
-        /* Output [0, 0]
-        * Expected [0, 1]
-        */
+        for (int i : twoSumOneGo(nums3, 6)) {
+            System.out.println(i);
+        }
+
     }
 
-    public static int[] twoSum(int[] nums, int target) {
-        int a = 0, b = 0;
-        Integer[] arr = new Integer[nums.length]; // creating Integer[] to find index
-        for (int k = 0; k < nums.length; k++) {
-            arr[k] = nums[k];
-        }
-
-        bothLoops:
-        for (Integer i : nums) {
-            int[] arr2 = shorten(nums, Arrays.asList(arr).indexOf(i)); // finding index of i
-            for (int j : arr2) {
-                if (i + j == target) {
-                    a = i;
-                    b = j;
-                    break bothLoops;
-                }
-            }
-        }
-        int[] res = {Arrays.asList(arr).indexOf(a), Arrays.asList(arr).indexOf(b)};
-        return res;
-    }
-
-    public static int[] shorten(int[] nums, int index) {
-        int[] array = new int[nums.length - 1];
-        for (int i = 0, j = 0; i < nums.length; i++) {
-            if (i == index) {
-                continue;
-            }
-            array[j++] = nums[i];
-        }
-        return array;
-    }
-
-    public static int[] twoSum2(int[] nums, int target) {
-        int a = 0, b = 0;
-
-        Integer[] newNums = new Integer[nums.length];
+    private static Map<Integer, Integer> getMap(int[] nums) {
+        Map<Integer, Integer> indexMap = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            newNums[i] = nums[i];
+            indexMap.put(nums[i], i);
         }
+        return indexMap;
+    }
 
-        outerLoopBreak:
-        for (int x : newNums) {
-            for (int y : newNums) {
-                if (Arrays.asList(newNums).indexOf(x) == Arrays.asList(newNums).indexOf(y)) {
-                    continue;
-                }
-                if (x + y == target) {
-                    a = x;
-                    b = y;
-                    break outerLoopBreak;
+    static int[] twoSumsMap(int[] nums, int target) {
+        Map<Integer, Integer> map = getMap(nums);
+        for (int i = 0; i < nums.length; i++) {
+            int j = target - nums[i];
+            if (map.containsKey(j) && map.get(j) != i) {
+                return new int[]{i, map.get(j)};
+            }
+        }
+        throw new IllegalArgumentException("Target not valid");
+    }
+
+    static int[] twoSumsBrute(int[] nums, int target) {
+        for (int x = 0; x < nums.length; x++) {
+            for (int y = x + 1; y < nums.length; y++) {
+                if (nums[x] + nums[y] == target) {
+                    return new int[]{x, y};
                 }
             }
         }
-        int[] result = {Arrays.asList(newNums).indexOf(a), Arrays.asList(newNums).indexOf(b)};
-        return result;
+        throw new IllegalArgumentException("Target not valid");
+    }
+
+    //  check the elements while adding to map
+    static int[] twoSumOneGo(int[] nums, int target) {
+        Map<Integer, Integer> indexMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int j = target - nums[i];
+            if (indexMap.containsKey(j)) {
+                return new int[]{indexMap.get(j), i};
+            }
+            indexMap.put(nums[i], i);
+        }
+        throw new IllegalArgumentException("Target not valid");
     }
 }
