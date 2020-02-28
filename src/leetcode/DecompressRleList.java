@@ -15,6 +15,8 @@
 
 package leetcode;
 
+import java.util.ArrayList;
+
 public class DecompressRleList {
     public static void main(String[] args) {
         int nums[] = {1, 2, 3, 4};
@@ -25,27 +27,40 @@ public class DecompressRleList {
     }
 
     public static int[] decompressRLElist(int[] nums) {
+        int arrayLength = 0;
+        ArrayList<Integer> freq = new ArrayList<>();
+        ArrayList<Integer> val = new ArrayList<>();
+        ArrayList<Integer> result = new ArrayList<>();
+
         if (nums.length % 2 != 0) {
             throw new IllegalArgumentException("Нечетное количество аргументов");
         }
-        int arrayLength = 0;
         for (int i = 0; i < nums.length; i++) {
             if (i % 2 == 0) {
                 arrayLength += nums[i];
             }
         }
-        int[] result = new int[arrayLength];
+        int[] res = new int[arrayLength];
 
-/*        for (int i = 0; i < result.length; i++) { //
-            for (int j = 0; j < nums[i + 1]; j++) {
-                result[i] = nums[i * 2 + 1];
+        for (int i = 0; i < nums.length; i++) {
+            if (i % 2 == 0) {
+                val.add(nums[i]);
+            } else {
+                freq.add(nums[i]);
             }
-        }*/
-        for (int i = 0; i < nums[i + 1]; i++) {
-                        
+        }
+        /*Decompress the given array by repeating nums[2*i+1] a number of times equal to nums[2*i].*/
+        for (int i = 1; i < arrayLength; i++) {
+            for (int j = 0; j < nums[2 * i]; j++) {
+                result.add(nums[2 * i + 1]);
+            }
+        }
+
+        for (int i = 0; i < arrayLength; i++) {
+            res[i] = result.get(i);
         }
 
 
-        return result;
+        return res;
     }
 }
