@@ -19,7 +19,8 @@ import java.util.ArrayList;
 
 public class DecompressRleList {
     public static void main(String[] args) {
-        int nums[] = {1, 2, 3, 4};
+//        int nums[] = {1, 2, 3, 4};
+        int nums[] = {39, 42};
         int result[] = decompressRLElist(nums);
         for (int i : result) {
             System.out.print(i + " ");
@@ -35,11 +36,22 @@ public class DecompressRleList {
         if (nums.length % 2 != 0) {
             throw new IllegalArgumentException("Нечетное количество аргументов");
         }
+<<<<<<< HEAD
+=======
+        ArrayList<Integer> result = new ArrayList<>();
+        ArrayList<Integer> freq = new ArrayList<>();
+        ArrayList<Integer> val = new ArrayList<>();
+
+//        filling val and freq
+>>>>>>> f49290e9461fae3b9c95521f68ea36f165b06038
         for (int i = 0; i < nums.length; i++) {
-            if (i % 2 == 0) {
-                arrayLength += nums[i];
+            if (i % 2 != 0) {
+                val.add(nums[i]);
+            } else {
+                freq.add(nums[i]);
             }
         }
+<<<<<<< HEAD
         int[] res = new int[arrayLength];
 
         for (int i = 0; i < nums.length; i++) {
@@ -62,5 +74,21 @@ public class DecompressRleList {
 
 
         return res;
+=======
+
+//        adding val to result
+        for (int i = 0; i < val.size(); i++) {
+            for (int j = 0; j < freq.get(i); j++) {
+                result.add(val.get(i));
+            }
+        }
+
+//        converting ArrayList to Array
+        int[] arr = new int[result.size()];
+        for (int i = 0; i < result.size(); i++) {
+            arr[i] = result.get(i);
+        }
+        return arr;
+>>>>>>> f49290e9461fae3b9c95521f68ea36f165b06038
     }
 }
