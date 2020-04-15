@@ -11,7 +11,7 @@ package codewars;
 
 public class YouOnlyNeedOne {
     public static void main(String[] args) {
-        ifContains(new Character[] {'t','e','s','t'}, 'a');
+        System.out.println(ifContains(new Character[] {'t','e','s','t'}, 'e'));
     }
 
     private static boolean ifContains(Object[] a, Object x) {
