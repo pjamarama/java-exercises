@@ -16,18 +16,24 @@ import java.time.LocalDate;
 
 public class UnluckyDays {
     public static void main(String[] args) {
-//        System.out.println(unluckyDays(int year));
-        unluckyDays();
+        System.out.println(check13thDay(2016));
     }
 
-    //    private static int unluckyDays(int year) {
-//        int result = 0;
-//        return result;
-//    }
-    private static void unluckyDays(int year) {
-        LocalDate localDate = LocalDate.of(year, 1, 1);
-        DayOfWeek firstWeekdayOfYear = localDate.getDayOfWeek();
-        
+    /**
+     * Method runs a loop for 12 months for the given year and checks if the 13th day of each month is Friday.
+     * Int value of a year is accepted, and number of Frdays 13 is returned as int
+     *
+     * @param year
+     * @return
+     */
+    private static int check13thDay(int year) {
+        int amountOfFridays13 = 0;
+        for (int month = 1; month < 13; month++) {
+            LocalDate day13 = LocalDate.of(year, month, 13);
+            if (day13.getDayOfWeek() == DayOfWeek.FRIDAY) {
+                amountOfFridays13++;
+            }
+        }
+        return amountOfFridays13;
     }
-
 }
