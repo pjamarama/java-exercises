@@ -9,9 +9,16 @@
 
 package codewars;
 
+import java.util.Arrays;
+
 public class YouOnlyNeedOne {
     public static void main(String[] args) {
         System.out.println(ifContains(new Character[] {'t','e','s','t'}, 'e'));
+        System.out.println(ifContains2(new Character[] {'t','e','s','t'}, 'e'));
+    }
+
+    private static boolean ifContains2(Object[] a, Object x) {
+        return Arrays.asList(a).contains(x);
     }
 
     private static boolean ifContains(Object[] a, Object x) {
