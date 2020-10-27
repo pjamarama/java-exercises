@@ -1,13 +1,12 @@
 # Project exclude paths
 /out/
-<<<<<<< HEAD
+
 .idea/encodings.xml
 .idea/vcs.xml
-=======
-
 .idea/codeStyles
 .idea/misc.xml
 .idea/modules.xml
 .idea/vcs.xml
 exercises.iml
->>>>>>> 94109d3f6ce7a72936efc7281f4bb85d60dc4381
+
+/src/Test/
