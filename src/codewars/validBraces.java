@@ -1,4 +1,4 @@
-/*
+/**
 Write a function that takes a string of braces, and determines if the order of the braces is valid.
 It should return true if the string is valid, and false if it's invalid.
 
@@ -26,7 +26,7 @@ public class validBraces {
     }
 
     public static boolean isValid(String braces) {
-        Stack<Character> stack = new Stack<>();
+        Stack<Character> stack = new Stack<>(); // ArrayDeck is preferred over the Stack
         try {
             for (char c : braces.toCharArray()) {
                 if (c == '{' || c == '[' || c == '(') {
